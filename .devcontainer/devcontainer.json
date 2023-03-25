@@ -1,0 +1,17 @@
+{
+  "name": "sanrokumaru",
+  "image": "node:16",
+  "extensions": [
+	"svelte.svelte-vscode",
+	"GitHub.vscode-pull-request-github",
+	"GitHub.copilot",
+	"mhutchie.git-graph",
+	"donjayamanne.githistory"
+],
+  "settings": {
+    "terminal.integrated.shell.linux": null
+  },
+  "appPort": [4000],
+
+  "postCreateCommand": "npm install"
+}
