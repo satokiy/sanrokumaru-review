@@ -3,7 +3,14 @@
 </script>
 
 <header>
-  <Text>
-    <slot>Header Header</slot>
-  </Text>
+  <h1>
+   <slot>Header Header</slot>
+  </h1>
 </header>
+
+<style>
+  h1 {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+</style>
