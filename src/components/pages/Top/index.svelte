@@ -1,6 +1,7 @@
 <script lang="ts">
-  import Footer from "../../organisms/Footer/index.svelte";
   import Header from "../../organisms/Header/index.svelte";
+  import Footer from "../../organisms/Footer/index.svelte";
+  import Congratulation from "../../organisms/Congratulation/index.svelte";
   import DonutsChart from "../../molecules/DonutsChart/index.svelte";
   import Button from "../../atoms/Button/index.svelte";
   import Inputfield from "../../atoms/Input/index.svelte";
@@ -50,6 +51,11 @@
   $: className = "";
 
   /**
+   * お祝いを表示するかどうか
+   */
+  let isCongratulation: boolean = false;
+
+  /**
    * 関数
    */
   const countUp = (value: Angle) => {
@@ -67,19 +73,24 @@
   };
 
   const onClick = () => {
-    console.log("angle", angle);
-
+    isCongratulation = false;
     // 進捗を一度リセットしてから、再度表示する
     className = "animation-reset";
     progressToDisplay = 0;
+
     setTimeout(() => {
       className = "animation";
       progressToDisplay = progress;
       countUp(angle);
+
+      if (progress >= 100) {
+        setTimeout(() => {
+          isCongratulation = true;
+        }, 2000);
+      }
     }, 500);
   };
-  const calclate = (e) => {
-    console.log(e);
+  const calclate = (_e) => {
     if (
       total == 0 ||
       total == null ||
@@ -94,7 +105,7 @@
   };
 </script>
 
-<Header>header header header</Header>
+<Header>360度評価の進捗</Header>
 <div class="Top">
   <DonutsChart
     {className}
@@ -117,10 +128,13 @@
   </div>
 
   <div class="mb-4">
-    <Button {onClick} color="svelte" {disabled}>角度チェック</Button>
+    <Button {onClick} color="svelte" {disabled}>チェック</Button>
   </div>
 </div>
 <Footer />
+{#if isCongratulation}
+  <Congratulation />
+{/if}
 
 <style lang="scss">
   .Top {
