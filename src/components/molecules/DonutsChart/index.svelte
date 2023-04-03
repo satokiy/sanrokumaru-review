@@ -1,16 +1,27 @@
-<script>
+<script lang="ts">
   import Text from "../../atoms/Text/index.svelte";
   export let radius = 100;
   export let coordinate = 200;
-  export const circumference = `${2 * Math.PI * radius}`;
-  const angle = '100';
-  export let color = "teal"
+  const circumference = `${2 * Math.PI * radius}`;
+  export let angle: "--" | number;
+  // export let color = "svelte";
+  export let className = "svelte";
+
+  export let progress = 0;
 </script>
 
 <div id="chart">
   <svg id="donuts">
     <circle id="base" cx={coordinate} cy={coordinate} r={radius} />
-    <circle id="line" class={color} cx={coordinate} cy={coordinate} r={radius} />
+    <circle
+      id="line"
+      class={className}
+      cx={coordinate}
+      cy={coordinate}
+      r={radius}
+      style:--progress={progress}
+      style:--circumference={circumference}
+    />
   </svg>
   <div class="inner-text">
     <h3 class="inner-value text-8xl font-sans font-semibold">
@@ -20,10 +31,6 @@
 </div>
 
 <style>
-  :root {
-    --circumference: 1000px;
-    --progress: 50;
-  }
   #chart {
     display: flex;
     justify-content: center;
@@ -57,7 +64,15 @@
     stroke: #ff3e00;
     stroke-dasharray: var(--circumference);
     stroke-dashoffset: var(--circumference);
-    animation: dash 2s ease-in-out forwards;
+    transition: stroke-dashoffset 2s ease-out;
+  }
+  #line.animation-reset {
+    transition: unset;
+  }
+  #line.animation {
+    stroke-dashoffset: calc(
+      var(--circumference) - (var(--circumference) * var(--progress)) / 100
+    );
   }
 
   @keyframes dash {

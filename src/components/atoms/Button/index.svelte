@@ -4,8 +4,10 @@
   export let onClick: () => void;
   export let color: ButtonColor = "svelte";
   export const size = "md";
+  export let disabled: boolean;
+  $:disabledCss = disabled ? "opacity-50 cursor-not-allowed" : "";
 
-  const className = [color, size].join(" ");
+  $:className = [color, size, disabledCss].join(" ");
 </script>
 
 <button class={className} on:click={onClick}>
