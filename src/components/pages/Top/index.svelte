@@ -43,7 +43,7 @@
   /**
    * ボタンのdisabled
    */
-  $: disabled = false;
+  $: disabled = true;
 
   /**
    * ドーナツチャートのclass名
@@ -54,6 +54,17 @@
    * お祝いを表示するかどうか
    */
   let isCongratulation: boolean = false;
+  $: isCongratulation;
+
+  /**
+   * yaer
+   */
+  const year = new Date().getFullYear();
+
+  /**
+   * AppName
+   */
+  const appName = "Sanrokumaru";
 
   /**
    * 関数
@@ -73,6 +84,7 @@
   };
 
   const onClick = () => {
+    if (disabled) return;
     isCongratulation = false;
     // 進捗を一度リセットしてから、再度表示する
     className = "animation-reset";
@@ -91,13 +103,7 @@
     }, 500);
   };
   const calclate = (_e) => {
-    if (
-      total == 0 ||
-      total == null ||
-      finished == 0 ||
-      finished == null ||
-      progress > 100
-    ) {
+    if (total == 0 || total == null || finished == null || progress > 100) {
       disabled = true;
     } else {
       disabled = false;
@@ -131,7 +137,8 @@
     <Button {onClick} color="svelte" {disabled}>チェック</Button>
   </div>
 </div>
-<Footer />
+<Footer>{year} - {appName}</Footer>
+
 {#if isCongratulation}
   <Congratulation />
 {/if}
