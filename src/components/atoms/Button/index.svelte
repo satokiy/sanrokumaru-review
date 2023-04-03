@@ -5,9 +5,9 @@
   export let color: ButtonColor = "svelte";
   export const size = "md";
   export let disabled: boolean;
-  $:disabledCss = disabled ? "opacity-50 cursor-not-allowed" : "";
+  $: disabledCss = disabled ? "opacity-50 cursor-not-allowed" : "";
 
-  $:className = [color, size, disabledCss].join(" ");
+  $: className = [color, size, disabledCss].join(" ");
 </script>
 
 <button class={className} on:click={onClick}>
@@ -19,16 +19,16 @@
     * Color
     */
   .teal {
-    @apply font-bold font-sans py-2 px-4 rounded bg-teal-600 text-white shadow-md border-teal-600;
+    @apply rounded border-teal-600 bg-teal-600 px-4 py-2 font-sans font-bold text-white shadow-md;
   }
   .teal:hover {
-    @apply bg-teal-400 border-teal-400;
+    @apply border-teal-400 bg-teal-400;
   }
   .svelte {
-    @apply font-bold font-sans py-2 px-4 rounded bg-svelte text-white shadow-md border-svelte;
+    @apply rounded border-svelte bg-svelte px-4 py-2 font-sans font-bold text-white shadow-md;
   }
   .svelte:hover {
-    @apply bg-svelte-light border-svelte-light;
+    @apply border-svelte-light bg-svelte-light;
   }
 
   /**

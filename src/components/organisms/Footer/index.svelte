@@ -1,7 +1,7 @@
 <script>
   import Text from "../../atoms/Text/index.svelte";
   const year = new Date().getFullYear();
-  const appName = 'sanrokumaru'
+  const appName = "sanrokumaru";
 </script>
 
 <footer>

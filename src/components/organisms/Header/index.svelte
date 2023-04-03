@@ -4,7 +4,7 @@
 
 <header>
   <h1>
-   <slot>Header Header</slot>
+    <slot>Header Header</slot>
   </h1>
 </header>
 
